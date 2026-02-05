@@ -1,0 +1,38 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Finding elements using getByTestId and locators", () => {
+  test.use({ testIdAttribute: "pw-test" });
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/practice/simple-elements-custom-attribute.html");
+  });
+
+  test("click the button (using getByTestId)", async ({ page }) => {
+    // Arrange
+    const buttonTestId = "simple-button";
+    const resultsId = "#results";
+    const expectedMessage = "You clicked the button!";
+    const buttonLocator = page.getByTestId(buttonTestId);
+    const resultsLocator = page.locator(resultsId);
+
+    // Act
+    await buttonLocator.click();
+
+    // Assert
+    await expect(resultsLocator).toHaveText(expectedMessage);
+  });
+
+  test("click the button (using locator)", async ({ page }) => {
+    // Arrange
+    const buttonSelector = '[pw-test="simple-button"]';
+    const resultsId = "#results";
+    const expectedMessage = "You clicked the button!";
+    const buttonLocator = page.locator(buttonSelector);
+    const resultsLocator = page.locator(resultsId);
+
+    // Act
+    await buttonLocator.click();
+
+    // Assert
+    await expect(resultsLocator).toHaveText(expectedMessage);
+  });
+});
