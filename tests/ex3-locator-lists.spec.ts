@@ -82,4 +82,60 @@ test.describe("Locator lists", () => {
     // Assert
     // some assert
   });
+  test("All checkboxes on page (ver. 1)", async ({ page }) => {
+    // Arrange
+    const elementRole = "checkbox";
+    const resultsId = "#results";
+    const checkboxLocator = page.getByRole(elementRole);
+    const resultsLocator = page.locator(resultsId);
+    const expectedElementsCount = 5;
+
+    // Act
+    console.log(await checkboxLocator.count());
+
+    // Assert
+    await expect(checkboxLocator).toHaveCount(expectedElementsCount);
+
+    const numberOfElements = await checkboxLocator.count();
+    for (let i = 0; i < numberOfElements; i++) {
+      // Act
+      await checkboxLocator.nth(i).check();
+      console.log(await resultsLocator.innerText());
+      // Assert
+      await expect(resultsLocator).toHaveText(
+        `Checkbox is checked! (Opt ${i + 1}!)`,
+      );
+    }
+  });
+
+  test("All checkboxes on page (ver. 2)", async ({ page }) => {
+    // Arrange
+    const elementRole = "checkbox";
+    const resultsId = "#results";
+    const checkboxLocator = page.getByRole(elementRole);
+    const resultsLocator = page.locator(resultsId);
+    const expectedElementsCount = 5;
+    const expectedMessages: { [key: number]: string } = {
+      0: "Checkbox is checked! (Opt 1!)",
+      1: "Checkbox is checked! (Opt 2!)",
+      2: "Checkbox is checked! (Opt 3!)",
+      3: "Checkbox is checked! (Opt 4!)",
+      4: "Checkbox is checked! (Opt 5!)",
+    };
+
+    // Act
+    console.log(await checkboxLocator.count());
+
+    // Assert
+    await expect(checkboxLocator).toHaveCount(expectedElementsCount);
+
+    const numberOfElements = await checkboxLocator.count();
+    for (let i = 0; i < numberOfElements; i++) {
+      // Act
+      await checkboxLocator.nth(i).check();
+      console.log(await resultsLocator.innerText());
+      // Assert
+      await expect(resultsLocator).toHaveText(expectedMessages[i]);
+    }
+  });
 });
