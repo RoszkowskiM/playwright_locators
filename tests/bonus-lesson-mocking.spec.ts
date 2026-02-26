@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { assert } from "node:console";
 
 test.describe("Test User Data", () => {
   test("Check username visibility", async ({ page }) => {
