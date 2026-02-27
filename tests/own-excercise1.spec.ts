@@ -39,8 +39,8 @@ test.describe("Actions on a button", () => {
   test("Hover over an event", async ({ page }) => {
     // Arrange
     // const eventLocator = page.getByText('Hoover mouse here!');
-    const eventLocator = page.getByTestId('dti-tooltip-element');
-    
+    const eventLocator = page.getByTestId("dti-tooltip-element");
+
     const resultsLocator = page.getByTestId("dti-results");
     const expectedMessage = "Mouse over event occurred!";
 
@@ -50,5 +50,82 @@ test.describe("Actions on a button", () => {
 
     // Assert
     await expect(resultsLocator).toHaveText(expectedMessage);
+  });
+});
+
+test.describe("Actions on text box", () => {
+  test("Textbox fill and clear", async ({ page }) => {
+    // Arrange
+    const txtboxLocator = page.locator("textarea");
+    const resultsLocator = page.getByTestId("dti-results");
+    const expectedMessage = "Textarea value changed to: Sweet filling";
+    const expectedMessageAfterClear = "Textarea value changed to:";
+
+    // Act
+    await page.goto("practice/simple-elements-no-ids.html");
+    await txtboxLocator.fill("Sweet filling");
+    await txtboxLocator.blur();
+    await expect(resultsLocator).toHaveText(expectedMessage);
+    await txtboxLocator.clear();
+    await txtboxLocator.blur();
+
+    // Assert
+    await expect(resultsLocator).toHaveText(expectedMessageAfterClear);
+  });
+
+  test("Textbox fill (slow typing)", async ({ page }) => {
+    // Arrange
+    const txtboxLocator = page.locator("textarea");
+    const resultsLocator = page.getByTestId("dti-results");
+    const expectedMessage = "Textarea value changed to: Sweet filling";
+
+    // Act
+    await page.goto("practice/simple-elements-no-ids.html");
+    await txtboxLocator.pressSequentially("Sweet filling", { delay: 500 });
+    await txtboxLocator.blur();
+
+    // Assert
+    await expect(resultsLocator).toHaveText(expectedMessage);
+  });
+
+  test.describe("Actions on dropdowns", () => {
+    test("Select option", async ({ page }) => {
+      // Arrange
+      const dropdownLocator = page.getByRole("combobox").nth(2);
+      const resultsLocator = page.getByTestId("dti-results");
+      const expectedMessage = "Selected option: option2 (Third one!)";
+
+      // Act
+      await page.goto("practice/simple-multiple-elements-no-ids.html");
+      // await dropdownLocator.selectOption("option2");
+      // await dropdownLocator.selectOption({label: "Option 2"});
+      await dropdownLocator.selectOption({ index: 1 });
+
+      // Assert
+      await expect(resultsLocator).toHaveText(expectedMessage);
+    });
+
+    test("Get dropdown values", async ({ page }) => {
+      // Arrange
+      const dropdownLocator = page.getByRole("combobox").nth(2);
+
+      // Act
+      await page.goto("practice/simple-multiple-elements-no-ids.html");
+      const dropdwnElemList = await dropdownLocator.allTextContents();
+
+      // const dropdwnElemList = await dropdownLocator.all();
+      // const optionsArr = [];
+      // for (let ele of dropdwnElemList) {
+      //   const eleText = await ele.textContent();
+      //   if (eleText) {
+      //     optionsArr.push(eleText);
+      //   }
+      // }
+
+      // Assert
+      // console.log(`list of options: ${optionsArr}`);
+
+      console.log(`list of options: ${dropdwnElemList}`);
+    });
   });
 });
