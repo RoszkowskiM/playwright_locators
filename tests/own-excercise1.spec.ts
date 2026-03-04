@@ -2,13 +2,16 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Actions on a button", () => {
   test("Enter key on a button", async ({ page }) => {
+    test.setTimeout(10_000);
+    test.slow();
+
     // Arrange
     const btnLocator = page.getByRole("button", { name: "Click me!" });
     const resultsLocator = page.getByTestId("dti-results");
     const expectedMessage = "You clicked the button!";
 
     // Act
-    await page.goto("practice/simple-elements.html");
+    await page.goto("practice/simple-elements.html", {timeout: 30_000});
     await btnLocator.press("Enter");
 
     // Assert
@@ -66,7 +69,7 @@ test.describe("Actions on text box", () => {
     await txtboxLocator.fill("Sweet filling");
     await txtboxLocator.blur();
     await expect(resultsLocator).toHaveText(expectedMessage);
-    await txtboxLocator.clear();
+    await txtboxLocator.clear({ timeout: 5_000 });
     await txtboxLocator.blur();
 
     // Assert
@@ -85,7 +88,9 @@ test.describe("Actions on text box", () => {
     await txtboxLocator.blur();
 
     // Assert
-    await expect(resultsLocator).toHaveText(expectedMessage);
+    await expect(resultsLocator).toHaveText(expectedMessage, {
+      timeout: 3_000,
+    });
   });
 
   test.describe("Actions on dropdowns", () => {
