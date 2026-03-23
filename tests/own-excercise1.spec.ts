@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Actions on a button", () => {
-  test("Enter key on a button", async ({ page }) => {
+  test("'Enter' key on a button", async ({ page }) => {
     test.setTimeout(10_000);
     test.slow();
 
