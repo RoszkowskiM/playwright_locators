@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "reservation": "npx playwright test /tests/ex5-reservation.spec.ts --headed"
+    "reservation": "npx playwright test /tests/ex5-reservation.spec.ts --headed",
+    "web-first": "npx playwright test /tests/ex7-web-first-assertions.spec.ts"
   },
   "keywords": [],
   "author": "",
