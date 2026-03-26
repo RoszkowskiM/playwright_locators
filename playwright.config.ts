@@ -6,12 +6,12 @@ export default defineConfig({
   fullyParallel: true,
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
-  expect: {
-    timeout: 30_000,
-  },
+  // expect: {
+  //   timeout: 30_000,
+  // },
   use: {
     baseURL: "http://localhost:3000",
-    trace: "on",
+    trace: "retain-on-failure",
     // testIdAttribute: "pw-test",
     // actionTimeout: 2_000,
     // navigationTimeout: 10_000,

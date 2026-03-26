@@ -67,8 +67,8 @@ test.describe("Test User Data", () => {
     // Arrange:
     const userAgeTestId = "user-age";
     const userAgeLocator = page.getByTestId(userAgeTestId);
-    const expectedAge = "103";
-    const birthDate = "1923-11-20T23:00:00.000Z";
+    const expectedAge = "38";
+    const birthDate = "1988-11-20T23:00:00.000Z";
 
     await page.route("/api/v1/data/random/simple-user", async (route) => {
       const response = await route.fetch();
