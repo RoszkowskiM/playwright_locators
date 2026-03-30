@@ -35,18 +35,22 @@ export const expect = baseExpect.extend({
     };
   },
 
-  toBePercentageValue(actualValue: string): MatcherReturnType {
+  toBePercentageValue(
+    actualValue: string,
+    min = 0,
+    max = 100,
+  ): MatcherReturnType {
     let message = "";
     let pass = false;
     const actualValueAsNumber = parseInt(actualValue);
     const actualValueLastChar = actualValue.endsWith("%");
-    const isInRange = actualValueAsNumber >= 0 && actualValueAsNumber <= 100;
+    const isInRange = actualValueAsNumber >= min && actualValueAsNumber <= max;
 
     if (isInRange === true && actualValueLastChar === true) {
       message = "Passed";
       pass = true;
     } else {
-      message = `toBePercentageValue() assertion failed.\nYou expected ${actualValue} to be in range <0%-100%>\nwith percentage sign "%"`;
+      message = `toBePercentageValue() assertion failed.\nYou expected ${actualValue} to be in range <${min}%-${max}%>\nwith percentage sign "%"`;
     }
     return {
       message: () => message,
