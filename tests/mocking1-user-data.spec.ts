@@ -4,7 +4,7 @@ test.describe("Test User Data", () => {
   test("Check username visibility", async ({ page }) => {
     // Arrange:
     const userNameTestId = "user-full-name";
-    const usernameLocator = page.getByTestId(userNameTestId);
+    const userNameLocator = page.getByTestId(userNameTestId);
 
     await page.route("/api/v1/data/random/simple-user", async (route) => {
       const response = await route.fetch();
@@ -17,8 +17,8 @@ test.describe("Test User Data", () => {
     await page.goto("/practice/random-simple-user-v1.html");
 
     // Assert
-    await expect(usernameLocator).toBeVisible();
-    const userName = await usernameLocator.innerText();
+    await expect(userNameLocator).toBeVisible();
+    const userName = await userNameLocator.innerText();
     console.log(userName);
   });
 
