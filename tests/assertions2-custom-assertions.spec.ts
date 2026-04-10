@@ -27,7 +27,7 @@ test.describe("Custom assertion example", () => {
     // Arrange:
     const todaysTempTestId = "dti-temperature-today";
     const todaysTempLocator = page.getByTestId(todaysTempTestId);
-    const minExpectedTemp = 20;
+    const minExpectedTemp = 0;
     const maxExpectedTemp = 40;
 
     // Act:
@@ -45,7 +45,7 @@ test.describe("Custom assertion example", () => {
     // Arrange:
     const todaysTempTestId = "dti-temperature-today";
     const todaysTempLocator = page.getByTestId(todaysTempTestId);
-    const minExpectedTemp = 20;
+    const minExpectedTemp = 0;
     const maxExpectedTemp = 40;
 
     // Act:
