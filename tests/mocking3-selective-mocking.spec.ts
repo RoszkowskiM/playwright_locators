@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Test Weather Data", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/practice/random-weather-v2.html");
+  });
+
   test("Get weather data and present table to user", async ({ page }) => {
     // Arrange:
     const getWeatherButtonTestId = "get-weather";
@@ -9,7 +13,6 @@ test.describe("Test Weather Data", () => {
     const resultsTableLocator = page.getByTestId(resultsTableTestId);
 
     // Act:
-    await page.goto("/practice/random-weather-v2.html");
     getWeatherButtonLocator.click();
 
     // Assert:
@@ -29,7 +32,6 @@ test.describe("Test Weather Data", () => {
     });
 
     // Act:
-    await page.goto("/practice/random-weather-v2.html");
     getWeatherButtonLocator.click();
 
     // Assert:
@@ -46,22 +48,112 @@ test.describe("Test Weather Data", () => {
     const meanTemperatureLocator = page.getByTestId(meanTemperatureTestId);
     const expectedMeanTemperature = "24.25";
 
-    
     await page.route("/api/v1/data/random/weather-simple", async (route) => {
-        if (route.request().method() === "POST") {
-            await route.fulfill({ json: mockedApiResponse });
-        } else {
-            await route.fulfill({ json: mockedPastDayApiResponse });
-        }
+      if (route.request().method() === "POST") {
+        await route.fulfill({ json: mockedApiResponse });
+      } else {
+        await route.fulfill({ json: mockedPastDayApiResponse });
+      }
     });
-    
+
     // Act:
-    await page.goto("/practice/random-weather-v2.html");
     getWeatherButtonLocator.click();
     getPastDayButtonLocator.click();
 
     // Assert:
     await expect(meanTemperatureLocator).toHaveText(expectedMeanTemperature);
+  });
+
+  test("mock response for weather with 404", async ({ page }) => {
+    // Arrange:
+    const getWeatherButtonSelector = "get-weather";
+    const weatherTableSelector = "results-table";
+    const errorMessageSelector = "error-message";
+    const getWeatherButtonLocator = page.getByTestId(getWeatherButtonSelector);
+    const weatherTableLocator = page.getByTestId(weatherTableSelector);
+    const errorMessageLocator = page.getByTestId(errorMessageSelector);
+
+    await page.route("/api/v1/data/random/weather-simple", async (route) => {
+      await route.fulfill({ status: 404, body: "Not Found!" });
+    });
+
+    // Act:
+    getWeatherButtonLocator.click();
+
+    // Assert:
+    await expect.soft(weatherTableLocator).toBeHidden();
+    await expect.soft(errorMessageLocator).toBeVisible();
+  });
+
+  test("mock response for Warsaw in response", async ({ page }) => {
+    // Arrange:
+    const getWeatherButtonSelector = "get-weather";
+    const weatherTableSelector = "results-table";
+    const errorMessageSelector = "error-message";
+    const selectCitySelector = "city";
+    const getWeatherButtonLocator = page.getByTestId(getWeatherButtonSelector);
+    const weatherTableLocator = page.getByTestId(weatherTableSelector);
+    const errorMessageLocator = page.getByTestId(errorMessageSelector);
+    const selectCityLocator = page.getByTestId(selectCitySelector);
+
+    await page.route("/api/v1/data/random/weather-simple", async (route) => {
+      if (route.request().postData()?.includes("Warsaw")) {
+        await route.fulfill({ status: 404, body: "Not Found!" });
+      } else {
+        await route.continue();
+      }
+    });
+
+    // Act:
+    await getWeatherButtonLocator.click();
+
+    // Assert:
+    await expect.soft(weatherTableLocator).toBeHidden();
+    await expect.soft(errorMessageLocator).toBeVisible();
+
+    //Act:
+    selectCityLocator.selectOption({ value: "Madrid" });
+    await getWeatherButtonLocator.click();
+
+    //Assert:
+    await expect.soft(weatherTableLocator).toBeVisible();
+    await expect.soft(errorMessageLocator).toBeHidden();
+  });
+
+  test("mock response for response code 200", async ({ page }) => {
+    // Arrange:
+    const getWeatherButtonSelector = "get-weather";
+    const weatherTableSelector = "results-table";
+    const errorMessageSelector = "error-message";
+    const selectCitySelector = "city";
+    const getWeatherButtonLocator = page.getByTestId(getWeatherButtonSelector);
+    const weatherTableLocator = page.getByTestId(weatherTableSelector);
+    const errorMessageLocator = page.getByTestId(errorMessageSelector);
+    const selectCityLocator = page.getByTestId(selectCitySelector);
+
+    await page.route("/api/v1/data/random/weather-simple", async (route) => {
+      const response = await route.fetch();
+      if (response.status() === 200) {
+        await route.fulfill({ status: 404, body: "Not Found!" });
+      } else {
+        await route.continue();
+      }
+    });
+
+    // Act:
+    await getWeatherButtonLocator.click();
+
+    // Assert:
+    await expect.soft(weatherTableLocator).toBeHidden();
+    await expect.soft(errorMessageLocator).toBeVisible();
+
+    //Act:
+    selectCityLocator.selectOption({ value: "Madrid" });
+    await getWeatherButtonLocator.click();
+
+    //Assert:
+    await expect.soft(weatherTableLocator).toBeHidden();
+    await expect.soft(errorMessageLocator).toBeVisible();
   });
 });
 
