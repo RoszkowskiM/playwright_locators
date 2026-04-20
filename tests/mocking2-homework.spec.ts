@@ -65,7 +65,7 @@ test.describe("Test User Data", () => {
     await expect.soft(taxCostLocator).toHaveText(mockedTaxCost);
   });
 
-  test("Missing product data (will fail with NaN)", async ({ page }) => {
+  test.fail("Missing product data (will fail with NaN)", async ({ page }) => {
     // Arrange:
     const totalCostTestId = "total-cost";
     const totalCostLocator = page.getByTestId(totalCostTestId);

@@ -13,7 +13,7 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "retain-on-failure",
     // testIdAttribute: "pw-test",
-    // actionTimeout: 2_000,
+    actionTimeout: 10_000,
     // navigationTimeout: 10_000,
   },
   projects: [
