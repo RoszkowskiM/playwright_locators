@@ -1,4 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
+import path from "path";
+
+export const CREATOR_SESSION_PATH = path.join(
+  __dirname,
+  "./.auth/creator.json",
+);
+export const VIEWER_SESSION_PATH = path.join(__dirname, "./.auth/viewer.json");
 
 export default defineConfig({
   testDir: "./tests",
@@ -18,12 +25,38 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "chromium",
+      name: "setup",
       use: {
         ...devices["Desktop Chrome"],
-        // viewport: null,
-        // launchOptions: { args: ["--start-maximized"] },
       },
+      testMatch: /.*\.setup\.ts/,
+    },
+    // {
+    //   name: "chromium",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //     // viewport: null,
+    //     // launchOptions: { args: ["--start-maximized"] },
+    //   },
+    //   dependencies: ["setup"],
+    // },
+    {
+      name: "creator role",
+      grep: /@creator/,
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: CREATOR_SESSION_PATH,
+      },
+      dependencies: ["setup"],
+    },
+    {
+      name: "viewer role",
+      grep: /@viewer/,
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: VIEWER_SESSION_PATH,
+      },
+      dependencies: ["setup"],
     },
     // {
     //   name: "Galaxy S24",

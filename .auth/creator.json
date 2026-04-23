@@ -1,0 +1,85 @@
+{
+  "cookies": [
+    {
+      "name": "firstname",
+      "value": "Moses",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.031514,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "username",
+      "value": "Moses.Armstrong%40Feest.ca",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.03429,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "email",
+      "value": "Moses.Armstrong%40Feest.ca",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.034322,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1vc2VzLkFybXN0cm9uZ0BGZWVzdC5jYSIsImRhdGEiOiJUQkQiLCJpYXQiOjE3NzY5NjczOTAsImV4cCI6MTc3Njk3MDk5MH0.uvwX4-R5a9zGj-XEJJ7B3Pv_ALjekT9b7ANAr3Vq7sQ",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.034345,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "expires",
+      "value": "1776970990029",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.03437,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "id",
+      "value": "1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.034391,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "avatar",
+      "value": ".%5Cdata%5Cusers%5Cface_1591133479.7144732.jpg",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1776970990.03441,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:3000",
+      "localStorage": [
+        {
+          "name": "dragPositions",
+          "value": "[{\"attr\":\"1\",\"x\":0.2505533050064281},{\"attr\":\"2\",\"x\":0.2505533050064281},{\"attr\":\"5\",\"x\":0.5011066100128562},{\"attr\":\"7\",\"x\":0.2505533050064281},{\"attr\":\"4\",\"x\":0.5011066100128562},{\"attr\":\"3\",\"x\":0.2505533050064281},{\"attr\":\"6\",\"x\":0.2505533050064281}]"
+        }
+      ]
+    }
+  ]
+}
