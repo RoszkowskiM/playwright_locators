@@ -5,7 +5,7 @@
       "value": "Danial",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.02231,
+      "expires": 1777047736.526439,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -15,7 +15,7 @@
       "value": "Danial.Dicki%40dicki.test",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.024661,
+      "expires": 1777047736.52991,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -25,27 +25,27 @@
       "value": "Danial.Dicki%40dicki.test",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.024735,
+      "expires": 1777047736.529998,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "token",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRhbmlhbC5EaWNraUBkaWNraS50ZXN0IiwiZGF0YSI6IlRCRCIsImlhdCI6MTc3Njk2NzM5MCwiZXhwIjoxNzc2OTcwOTkwfQ.ILvzxd6j8CqRJrBn0bi26wmmdXIutEOcpoETPPhcoeE",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRhbmlhbC5EaWNraUBkaWNraS50ZXN0IiwiZGF0YSI6IlRCRCIsImlhdCI6MTc3NzA0NDEzNiwiZXhwIjoxNzc3MDQ3NzM2fQ.pyimakWhPEW_yKDe6z5E2n0a0H0KNY_51SG9AbXRDLc",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.024765,
+      "expires": 1777047736.530057,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "expires",
-      "value": "1776970990020",
+      "value": "1777047736525",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.024792,
+      "expires": 1777047736.530112,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -55,7 +55,7 @@
       "value": "2",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.02482,
+      "expires": 1777047736.53016,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -65,7 +65,7 @@
       "value": ".%5Cdata%5Cusers%5Cface_1591133060.68834.jpg",
       "domain": "localhost",
       "path": "/",
-      "expires": 1776970990.024841,
+      "expires": 1777047736.530205,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"

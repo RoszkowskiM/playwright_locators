@@ -12,7 +12,7 @@ export default defineConfig({
   // globalTimeout: 3 * 60 * 60_000, //3hrs
   fullyParallel: true,
   workers: process.env.CI ? 1 : undefined,
-  reporter: "html",
+  reporter: [["list"], ["html"]],
   // expect: {
   //   timeout: 30_000,
   // },
@@ -23,6 +23,14 @@ export default defineConfig({
     actionTimeout: 10_000,
     // navigationTimeout: 10_000,
   },
+
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixels: 200,
+    },
+  },
+
+  snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
   projects: [
     {
       name: "setup",
@@ -31,15 +39,14 @@ export default defineConfig({
       },
       testMatch: /.*\.setup\.ts/,
     },
-    // {
-    //   name: "chromium",
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //     // viewport: null,
-    //     // launchOptions: { args: ["--start-maximized"] },
-    //   },
-    //   dependencies: ["setup"],
-    // },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        // viewport: null,
+        // launchOptions: { args: ["--start-maximized"] },
+      },
+    },
     {
       name: "creator role",
       grep: /@creator/,
