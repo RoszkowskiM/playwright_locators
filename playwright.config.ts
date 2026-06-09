@@ -11,7 +11,8 @@ export default defineConfig({
   testDir: "./tests",
   // globalTimeout: 3 * 60 * 60_000, //3hrs
   fullyParallel: true,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 2,
+  // workers: 1,
   reporter: [["list"], ["html"]],
   // expect: {
   //   timeout: 30_000,
