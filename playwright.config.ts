@@ -13,7 +13,7 @@ export default defineConfig({
   fullyParallel: true,
   workers: process.env.CI ? 1 : 2,
   // workers: 1,
-  reporter: [["list"], ["html"]],
+  reporter: [["list"], ["html"], ["./logger/custom-reporter.ts"]],
   // expect: {
   //   timeout: 30_000,
   // },
